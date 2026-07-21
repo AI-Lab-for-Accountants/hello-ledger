@@ -12,6 +12,8 @@ tagline = "A tiny general ledger for learning GitHub"
 [firm]
 # Put your firm's name here — it appears in the sidebar.
 name = "AI Lab for Accountants"
-# Path to a small logo image (PNG/SVG) committed to your fork.
-# Swap in your own, or set to "" for no logo.
-logo = "assets/alfa-flask.svg"
+# Logo shown at the top of the sidebar (PNG/SVG committed to your fork).
+# A wide "lockup" (mark + name) looks best. Set to "" for no logo.
+logo = "assets/alfa-lockup.svg"
+# Optional square version, shown when the sidebar is collapsed.
+logo_icon = "assets/alfa-flask.svg"

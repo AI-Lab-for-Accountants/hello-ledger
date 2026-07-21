@@ -14,7 +14,11 @@ st.set_page_config(page_title=b["app"]["name"], page_icon="📗", layout="wide")
 get_conn()  # opens the database and creates tables on first run
 
 if b["firm"]["logo"]:
-    st.logo(b["firm"]["logo"])
+    st.logo(
+        b["firm"]["logo"],
+        size="large",
+        icon_image=b["firm"].get("logo_icon") or None,
+    )
 
 pages = [
     st.Page("views/get_started.py", title="Get Started", icon="🚀", default=True),
