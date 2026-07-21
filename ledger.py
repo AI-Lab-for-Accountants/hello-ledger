@@ -67,6 +67,8 @@ def to_cents(amount):
     """Turn a dollar amount (like 19.99 or '19.99') into integer cents."""
     if amount is None or amount == "":
         return 0
+    if isinstance(amount, str):
+        amount = amount.strip().replace(",", "")
     return int(round(float(amount) * 100))
 
 
