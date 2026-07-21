@@ -80,7 +80,8 @@ def preview_trial_balance(rows):
     names = account_names(conn)
     return [
         {"Account": label_for(names, r["account_number"]),
-         "Debit": r["debit"], "Credit": r["credit"]}
+         "Debit": money_or_zero(r["debit"]) / 100 or None,
+         "Credit": money_or_zero(r["credit"]) / 100 or None}
         for r in rows
     ]
 
@@ -93,9 +94,9 @@ def preview_transactions(rows):
     names = account_names(conn)
     return [
         {"Date": r["date"], "Description": r["description"],
+         "Amount": money_or_zero(r["amount"]) / 100,
          "Debit account": label_for(names, r["debit_account"]),
-         "Credit account": label_for(names, r["credit_account"]),
-         "Amount": r["amount"]}
+         "Credit account": label_for(names, r["credit_account"])}
         for r in rows
     ]
 
@@ -123,9 +124,15 @@ def upload_step(label, key, importer, success_message, sample_path, columns, pre
         return
 
     st.markdown(f"**Review before importing** — this is what's in `{file.name}`:")
-    display_rows = preview(rows)
-    st.dataframe(display_rows if display_rows is not None else rows,
-                 hide_index=True, width="stretch", height=240)
+    display_rows = preview(rows) or rows
+    money_columns = {"Amount", "Debit", "Credit"} & set(display_rows[0].keys())
+    st.dataframe(
+        display_rows,
+        hide_index=True,
+        width="stretch",
+        height=240,
+        column_config={c: st.column_config.NumberColumn(c, format="dollar") for c in money_columns},
+    )
     st.caption("Not right? Remove the file above, fix it, and upload again. Nothing is imported until you confirm.")
     if st.button("✓ Looks right — import it", key=f"btn_{key}", type="primary"):
         try:
