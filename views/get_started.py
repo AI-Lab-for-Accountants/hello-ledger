@@ -50,6 +50,15 @@ def money_or_zero(text):
         return 0
 
 
+def account_names(conn):
+    """number -> 'number — name' labels, for enriching preview tables."""
+    return {a["number"]: f"{a['number']} — {a['name']}" for a in ledger.list_accounts(conn)}
+
+
+def label_for(names, number):
+    return names.get(number, f"{number} ⚠️ not in your chart of accounts")
+
+
 def preview_accounts(rows):
     counts = {}
     for r in rows:
@@ -68,6 +77,12 @@ def preview_trial_balance(rows):
             f"⚠️ This trial balance doesn't balance — debits {md_money(debits)}, "
             f"credits {md_money(credits)}. The import will refuse it; fix the file first."
         )
+    names = account_names(conn)
+    return [
+        {"Account": label_for(names, r["account_number"]),
+         "Debit": r["debit"], "Credit": r["credit"]}
+        for r in rows
+    ]
 
 
 def preview_transactions(rows):
@@ -75,6 +90,14 @@ def preview_transactions(rows):
     dates = sorted(r["date"] for r in rows if r["date"])
     span = f"{dates[0]} to {dates[-1]}" if dates else "no dates found"
     st.caption(f"{len(rows)} transactions, {span}, totaling {md_money(total)}.")
+    names = account_names(conn)
+    return [
+        {"Date": r["date"], "Description": r["description"],
+         "Debit account": label_for(names, r["debit_account"]),
+         "Credit account": label_for(names, r["credit_account"]),
+         "Amount": r["amount"]}
+        for r in rows
+    ]
 
 
 def upload_step(label, key, importer, success_message, sample_path, columns, preview):
@@ -100,8 +123,9 @@ def upload_step(label, key, importer, success_message, sample_path, columns, pre
         return
 
     st.markdown(f"**Review before importing** — this is what's in `{file.name}`:")
-    preview(rows)
-    st.dataframe(rows, hide_index=True, width="stretch", height=240)
+    display_rows = preview(rows)
+    st.dataframe(display_rows if display_rows is not None else rows,
+                 hide_index=True, width="stretch", height=240)
     st.caption("Not right? Remove the file above, fix it, and upload again. Nothing is imported until you confirm.")
     if st.button("✓ Looks right — import it", key=f"btn_{key}", type="primary"):
         try:
