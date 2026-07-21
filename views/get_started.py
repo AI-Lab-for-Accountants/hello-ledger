@@ -42,8 +42,18 @@ else:
 st.divider()
 
 
-def upload_step(label, key, importer, success_message):
-    """One upload-and-import step: a file picker plus an import button."""
+def upload_step(label, key, importer, success_message, sample_path):
+    """One step: grab the sample file, upload a CSV, import it."""
+    filename = os.path.basename(sample_path)
+    with open(sample_path, "rb") as f:
+        st.download_button(
+            f"⬇️ Get the sample file ({filename})",
+            f.read(),
+            file_name=filename,
+            mime="text/csv",
+            key=f"dl_{key}",
+            help="Saves the sample CSV to your Downloads — then upload it below.",
+        )
     file = st.file_uploader(label, type="csv", key=f"file_{key}")
     if st.button("Import", key=f"btn_{key}", disabled=file is None):
         try:
@@ -62,11 +72,13 @@ else:
     with st.container(border=True):
         st.subheader("① Load your chart of accounts")
         st.markdown(
-            "The account list every entry will post to. Columns: "
-            "`account_number, name, type` — try `demo_data/accounts.csv`."
+            "The account list every entry will post to. Grab the sample below "
+            "(or bring your own CSV with columns `account_number, name, type`), "
+            "then upload it."
         )
         upload_step("Chart of accounts CSV", "coa", imports.import_accounts,
-                    "Chart of accounts loaded — {count} accounts created.")
+                    "Chart of accounts loaded — {count} accounts created.",
+                    "demo_data/accounts.csv")
 
 # -- Step 2: beginning balances ----------------------------------------------
 if state["has_opening"]:
@@ -78,12 +90,12 @@ else:
         st.subheader("② Post your beginning balances")
         st.markdown(
             "Upload the **prior-year ending trial balance** (post-close: balance sheet "
-            "accounts plus retained earnings, as of 2025-12-31). It must balance — the app "
-            "checks. Columns: `account_number, debit, credit` — try "
-            "`demo_data/trial_balance_2025-12-31.csv`."
+            "accounts plus retained earnings, as of 2025-12-31). It must balance — the "
+            "app checks. Columns: `account_number, debit, credit`."
         )
         upload_step("Prior-year trial balance CSV", "tb", imports.import_trial_balance,
-                    "Beginning balances posted — {count} accounts carried forward into 2026.")
+                    "Beginning balances posted — {count} accounts carried forward into 2026.",
+                    "demo_data/trial_balance_2025-12-31.csv")
 
 # -- Step 3: transactions ------------------------------------------------------
 if state["transaction_count"] > 0 and state["has_opening"]:
@@ -95,11 +107,11 @@ else:
         st.subheader("③ Import transactions")
         st.markdown(
             "Q1 2026 activity, one balanced transaction per row. Columns: "
-            "`date, description, debit_account, credit_account, amount` — try "
-            "`demo_data/transactions_q1_2026.csv`."
+            "`date, description, debit_account, credit_account, amount`."
         )
         upload_step("Transactions CSV", "txns", imports.import_transactions,
-                    "Transactions imported — {count} journal entries posted.")
+                    "Transactions imported — {count} journal entries posted.",
+                    "demo_data/transactions_q1_2026.csv")
 
 # -- Start fresh ---------------------------------------------------------------
 st.divider()
