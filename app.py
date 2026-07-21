@@ -24,7 +24,7 @@ pages = [
     st.Page("views/get_started.py", title="Get Started", icon="🚀", default=True),
     st.Page("views/accounts.py", title="Chart of Accounts", icon="📒"),
     st.Page("views/journal.py", title="Journal Entries", icon="✏️"),
-    st.Page("views/account_ledger.py", title="Ledger", icon="📖"),
+    st.Page("views/account_ledger.py", title="General Ledger", icon="📖"),
     st.Page("views/trial_balance.py", title="Trial Balance", icon="⚖️"),
 ]
 
