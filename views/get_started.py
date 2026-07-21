@@ -20,8 +20,32 @@ if (flash := st.session_state.pop("setup_flash", None)):
         celebrate()
 
 if all_done:
-    st.success("🎉 Your books are set up! Explore the ledger, then check the Trial Balance.")
-    st.page_link("views/trial_balance.py", label="See the Trial Balance", icon="⚖️")
+    st.success("🎉 Your books are set up! Here's your path from here:")
+    with st.container(border=True):
+        st.markdown("**1 · Read your books** — every entry, account by account, then the tie-out.")
+        st.page_link("views/account_ledger.py", label="Open the General Ledger", icon="📖")
+        st.page_link("views/trial_balance.py", label="Check the Trial Balance", icon="⚖️")
+    with st.container(border=True):
+        st.markdown(
+            "**2 · Post your own entry** — record April's rent: debit `5200 — Rent`, "
+            "credit `1000 — Cash - Operating`, $2,000. Watch it flow into the ledger."
+        )
+        st.page_link("views/journal.py", label="Go to Journal Entries", icon="✏️")
+    with st.container(border=True):
+        st.markdown(
+            "**3 · Make the app yours** *(on your fork — nothing to submit)* — put your firm's "
+            "name, logo, and color on it via `branding.toml` and `.streamlit/config.toml`, then "
+            "commit your first change and post a screenshot in the "
+            "[show-and-tell issue](https://github.com/AI-Lab-for-Accountants/hello-ledger/issues/1)."
+        )
+    with st.container(border=True):
+        st.markdown(
+            "**4 · Make it better** — this app is missing an income statement, a balance sheet, "
+            "CSV export… on purpose. Pick a "
+            "[good first issue](https://github.com/AI-Lab-for-Accountants/hello-ledger/issues), "
+            "follow [CONTRIBUTING.md](https://github.com/AI-Lab-for-Accountants/hello-ledger/blob/main/CONTRIBUTING.md), "
+            "and send your first pull request. That's the whole point of this repo. 🚀"
+        )
 else:
     st.markdown(
         "Use the sample files in the **`demo_data/`** folder, or bring your own CSVs "
