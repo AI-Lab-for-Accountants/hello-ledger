@@ -1,0 +1,16 @@
+# 🎨 Make it yours!
+#
+# This file is the "Add your branding" exercise: change these values on YOUR
+# fork and the app becomes your firm's. (Colors live in .streamlit/config.toml —
+# change primaryColor there to match your brand.)
+
+[app]
+name = "hello-ledger"
+tagline = "A tiny general ledger for learning GitHub"
+
+[firm]
+# Put your firm's name here — it appears in the sidebar.
+name = "Your Firm Name Here"
+# Optional: path to a small logo image (PNG/SVG) committed to your fork,
+# e.g. "assets/logo.png". Leave blank for no logo.
+logo = ""

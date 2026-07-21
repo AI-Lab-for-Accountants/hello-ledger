@@ -1,0 +1,23 @@
+account_number,name,type
+1000,Cash - Operating,Asset
+1100,Accounts Receivable,Asset
+1500,Computer Equipment,Asset
+1600,Accumulated Depreciation,Asset
+2000,Credit Card Payable,Liability
+2100,Payroll Liabilities,Liability
+2500,Note Payable,Liability
+3000,Member Capital,Equity
+3100,Member Draws,Equity
+3900,Retained Earnings,Equity
+4000,Consulting Revenue,Revenue
+4100,Bookkeeping Revenue,Revenue
+5000,Salaries & Wages,Expense
+5100,Payroll Taxes,Expense
+5200,Rent,Expense
+5300,Software Subscriptions,Expense
+5400,Office Supplies,Expense
+5500,Insurance,Expense
+5600,Professional Development,Expense
+5700,Meals,Expense
+5800,Bank Fees,Expense
+5900,Depreciation Expense,Expense

@@ -1,0 +1,4 @@
+# Tells pytest where the code lives, so a plain `pytest` works from anywhere.
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

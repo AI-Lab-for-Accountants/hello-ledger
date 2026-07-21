@@ -1,0 +1,48 @@
+date,description,debit_account,credit_account,amount
+2026-01-05,Collect December receivables,1000,1100,5200.00
+2026-01-08,January rent,5200,1000,2000.00
+2026-01-10,Software subscriptions,5300,2000,350.00
+2026-01-12,Invoice - Maple Street Dental,1100,4000,4800.00
+2026-01-15,Payroll,5000,1000,4200.00
+2026-01-15,Employer payroll taxes,5100,2100,380.00
+2026-01-16,Remit December payroll liabilities,2100,1000,1320.00
+2026-01-20,Bookkeeping retainer - Riverside Cafe,1000,4100,1500.00
+2026-01-22,Office supplies,5400,2000,180.00
+2026-01-25,Pay credit card statement,2000,1000,1850.00
+2026-01-27,Collect Maple Street Dental invoice,1000,1100,4800.00
+2026-01-30,Bank service fee,5800,1000,25.00
+2026-01-31,Note payment (principal),2500,1000,500.00
+2026-01-31,Business insurance,5500,1000,220.00
+2026-02-03,Collect remaining December receivables,1000,1100,3000.00
+2026-02-05,February rent,5200,1000,2000.00
+2026-02-09,Software subscriptions,5300,2000,350.00
+2026-02-10,Invoice - Harbor Fitness,1100,4000,6200.00
+2026-02-12,Professional development - tax update course,5600,2000,495.00
+2026-02-14,Payroll,5000,1000,4200.00
+2026-02-14,Employer payroll taxes,5100,2100,395.00
+2026-02-15,Remit January payroll liabilities,2100,1000,380.00
+2026-02-18,Bookkeeping retainer - Riverside Cafe,1000,4100,1500.00
+2026-02-20,New client lunch,5700,2000,85.00
+2026-02-24,Pay credit card statement,2000,1000,530.00
+2026-02-25,Collect Harbor Fitness invoice,1000,1100,6200.00
+2026-02-27,Bank service fee,5800,1000,25.00
+2026-02-27,Note payment (principal),2500,1000,500.00
+2026-02-28,Business insurance,5500,1000,220.00
+2026-03-02,Invoice - Bluebird Bakery,1100,4000,3900.00
+2026-03-04,March rent,5200,1000,2000.00
+2026-03-06,New laptop for staff,1500,1000,1400.00
+2026-03-09,Software subscriptions,5300,2000,350.00
+2026-03-11,Invoice - Cedar Point Vet Clinic,1100,4000,7400.00
+2026-03-13,Payroll,5000,1000,4200.00
+2026-03-13,Employer payroll taxes,5100,2100,395.00
+2026-03-15,Remit February payroll liabilities,2100,1000,395.00
+2026-03-17,Bookkeeping retainer - Riverside Cafe,1000,4100,1500.00
+2026-03-18,Collect Bluebird Bakery invoice,1000,1100,3900.00
+2026-03-19,Office supplies,5400,2000,140.00
+2026-03-23,Pay credit card statement,2000,1000,930.00
+2026-03-25,Bookkeeping cleanup project - Bluebird Bakery,1000,4100,950.00
+2026-03-27,Member draw,3100,1000,3000.00
+2026-03-30,Bank service fee,5800,1000,25.00
+2026-03-31,Note payment (principal),2500,1000,500.00
+2026-03-31,Business insurance,5500,1000,220.00
+2026-03-31,Q1 depreciation,5900,1600,600.00
