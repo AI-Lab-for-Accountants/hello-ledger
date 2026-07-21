@@ -5,7 +5,7 @@ import datetime as dt
 import streamlit as st
 
 import ledger
-from ui import account_labels, get_conn, page_header
+from ui import account_labels, get_conn, md_money, page_header, show_error
 
 conn = get_conn()
 page_header("Journal Entries", "Record a transaction — the entry must balance before it posts.")
@@ -54,11 +54,11 @@ total_credits = sum(l[2] for l in lines)
 
 if total_debits or total_credits:
     if total_debits == total_credits:
-        st.success(f"✓ In balance — debits and credits both total ${ledger.format_money(total_debits)}.")
+        st.success(f"✓ In balance — debits and credits both total {md_money(total_debits)}.")
     else:
         st.warning(
-            f"Not balanced yet — you're off by ${ledger.format_money(abs(total_debits - total_credits))} "
-            f"(debits ${ledger.format_money(total_debits)}, credits ${ledger.format_money(total_credits)})."
+            f"Not balanced yet — you're off by {md_money(abs(total_debits - total_credits))} "
+            f"(debits {md_money(total_debits)}, credits {md_money(total_credits)})."
         )
 
 if st.button("Post entry", type="primary"):
@@ -68,13 +68,13 @@ if st.button("Post entry", type="primary"):
         st.session_state["je_version"] = version + 1
         st.rerun()
     except ledger.LedgerError as e:
-        st.error(str(e))
+        show_error(e)
 
 entries = ledger.list_entries(conn)
 if entries:
     st.subheader("Recent entries")
     for e in entries:
-        header = f"{e['entry_date']} — {e['description']}  (${ledger.format_money(e['total_cents'])})"
+        header = f"{e['entry_date']} — {e['description']}  ({md_money(e['total_cents'])})"
         with st.expander(header):
             st.dataframe(
                 [

@@ -3,7 +3,7 @@
 import streamlit as st
 
 import ledger
-from ui import account_labels, get_conn, page_header
+from ui import account_labels, get_conn, md_money, page_header
 
 conn = get_conn()
 page_header("Ledger", "One account's full story, entry by entry, with a running balance.")
@@ -45,4 +45,4 @@ else:
             "Balance": st.column_config.NumberColumn("Balance", format="dollar"),
         },
     )
-    st.markdown(f"**Ending balance: ${ledger.format_money(rows[-1]['balance_cents'])}**")
+    st.markdown(f"**Ending balance: {md_money(rows[-1]['balance_cents'])}**")

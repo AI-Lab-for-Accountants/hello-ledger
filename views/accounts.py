@@ -3,7 +3,7 @@
 import streamlit as st
 
 import ledger
-from ui import get_conn, page_header
+from ui import get_conn, page_header, show_error
 
 conn = get_conn()
 page_header("Chart of Accounts", "Every account in your books, ordered by number.")
@@ -38,4 +38,4 @@ with st.form("add_account", clear_on_submit=True):
             st.session_state["account_added"] = f"Added {number} — {name} ({type_})."
             st.rerun()
         except ledger.LedgerError as e:
-            st.error(str(e))
+            show_error(e)

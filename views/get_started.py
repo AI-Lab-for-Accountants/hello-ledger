@@ -6,7 +6,7 @@ import streamlit as st
 
 import imports
 import ledger
-from ui import DB_PATH, get_conn, page_header
+from ui import DB_PATH, get_conn, page_header, show_error
 
 conn = get_conn()
 page_header("Get Started", "Set up your books in three steps — chart of accounts, beginning balances, then transactions.")
@@ -37,7 +37,7 @@ else:
             st.session_state["setup_flash"] = f"Demo books loaded — {count} Q1 transactions posted."
             st.rerun()
         except ledger.LedgerError as e:
-            st.error(str(e))
+            show_error(e)
 
 st.divider()
 
@@ -51,7 +51,7 @@ def upload_step(label, key, importer, success_message):
             st.session_state["setup_flash"] = success_message.format(count=count)
             st.rerun()
         except ledger.LedgerError as e:
-            st.error(str(e))
+            show_error(e)
 
 
 # -- Step 1: chart of accounts ------------------------------------------------

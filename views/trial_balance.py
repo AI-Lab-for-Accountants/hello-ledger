@@ -3,7 +3,7 @@
 import streamlit as st
 
 import ledger
-from ui import get_conn, page_header
+from ui import get_conn, md_money, page_header
 
 conn = get_conn()
 page_header("Trial Balance", "Every account's net balance. If the totals match, the books balance.")
@@ -36,14 +36,13 @@ st.dataframe(
 
 st.divider()
 st.markdown(
-    f"**Totals — Debits: ${ledger.format_money(total_debits)} · "
-    f"Credits: ${ledger.format_money(total_credits)}**"
+    f"**Totals — Debits: {md_money(total_debits)} · Credits: {md_money(total_credits)}**"
 )
 
 if total_debits == total_credits:
     st.success("✓ In balance — total debits equal total credits.")
 else:
     st.error(
-        f"Out of balance by ${ledger.format_money(abs(total_debits - total_credits))}. "
+        f"Out of balance by {md_money(abs(total_debits - total_credits))}. "
         "This should never happen — it means an unbalanced entry got into the database."
     )
