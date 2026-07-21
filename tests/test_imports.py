@@ -52,6 +52,15 @@ def test_excel_bom_and_messy_headers_tolerated(conn):
     assert imports.import_accounts(conn, upload(messy)) == 2
 
 
+def test_same_upload_parses_twice(conn):
+    """The review step parses the file for preview, then again on confirm."""
+    file = upload(COA_CSV)
+    first = imports.parse_csv(file, imports.ACCOUNTS_COLUMNS)
+    second = imports.parse_csv(file, imports.ACCOUNTS_COLUMNS)
+    assert first == second and len(first) == 3
+    assert imports.import_accounts(conn, file) == 3  # and the real import still works
+
+
 # ----------------------------------------------------------- trial balance
 
 

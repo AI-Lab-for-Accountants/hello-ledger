@@ -18,17 +18,23 @@ import ledger
 OPENING_DESCRIPTION = "Opening balances as of 2025-12-31"
 OPENING_DATE = "2026-01-01"
 
+ACCOUNTS_COLUMNS = ["account_number", "name", "type"]
+TRIAL_BALANCE_COLUMNS = ["account_number", "debit", "credit"]
+TRANSACTIONS_COLUMNS = ["date", "description", "debit_account", "credit_account", "amount"]
+
 
 def _rows(source, required_columns):
     """Read a CSV from a path or an uploaded file; normalize the headers.
 
     utf-8-sig handles the invisible marker Excel adds to CSVs it saves.
     Headers are lowercased and stripped so 'Account_Number ' still works.
+    Uploaded files are read via getvalue() so the same file can be parsed
+    twice — once for the review preview, once for the actual import.
     """
     if isinstance(source, (str, Path)):
         f = open(source, newline="", encoding="utf-8-sig")
     else:
-        f = io.TextIOWrapper(source, encoding="utf-8-sig", newline="")
+        f = io.StringIO(source.getvalue().decode("utf-8-sig"), newline="")
     reader = csv.DictReader(f)
     headers = [h.lower().strip() for h in (reader.fieldnames or [])]
     missing = [c for c in required_columns if c not in headers]
@@ -43,6 +49,11 @@ def _rows(source, required_columns):
         if any(clean.values()):  # skip fully blank lines
             rows.append(clean)
     return rows
+
+
+def parse_csv(source, required_columns):
+    """Parse and lightly check a CSV so the user can REVIEW it before importing."""
+    return _rows(source, required_columns)
 
 
 def _account_map(conn):
@@ -62,7 +73,7 @@ def _amount_cents(text, row_number, column):
 
 def import_accounts(conn, source):
     """Step 1 — load the chart of accounts. Returns how many were added."""
-    rows = _rows(source, ["account_number", "name", "type"])
+    rows = _rows(source, ACCOUNTS_COLUMNS)
     if not rows:
         raise ledger.LedgerError("The file has no account rows in it.")
     for i, r in enumerate(rows, start=2):  # row 1 is the header
@@ -96,7 +107,7 @@ def import_trial_balance(conn, source):
             "want to erase everything and import again."
         )
 
-    rows = _rows(source, ["account_number", "debit", "credit"])
+    rows = _rows(source, TRIAL_BALANCE_COLUMNS)
     lines = []
     for i, r in enumerate(rows, start=2):
         number = r["account_number"]
@@ -124,7 +135,7 @@ def import_transactions(conn, source):
     if not accounts:
         raise ledger.LedgerError("Load the chart of accounts first (step 1).")
 
-    rows = _rows(source, ["date", "description", "debit_account", "credit_account", "amount"])
+    rows = _rows(source, TRANSACTIONS_COLUMNS)
     if not rows:
         raise ledger.LedgerError("The file has no transaction rows in it.")
 
