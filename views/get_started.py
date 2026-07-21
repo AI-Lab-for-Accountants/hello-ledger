@@ -6,7 +6,7 @@ import streamlit as st
 
 import imports
 import ledger
-from ui import DB_PATH, get_conn, md_money, page_header, show_error
+from ui import DB_PATH, celebrate, get_conn, md_money, page_header, show_error
 
 conn = get_conn()
 page_header("Get Started", "Set up your books in three steps — chart of accounts, beginning balances, then transactions.")
@@ -17,7 +17,7 @@ all_done = state["has_accounts"] and state["has_opening"] and state["transaction
 if (flash := st.session_state.pop("setup_flash", None)):
     st.success(flash)
     if all_done:
-        st.balloons()
+        celebrate()
 
 if all_done:
     st.success("🎉 Your books are set up! Explore the ledger, then check the Trial Balance.")
