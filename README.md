@@ -62,9 +62,10 @@ Or click **⚡ Load all the demo data for me** and skip to exploring.
 
 ## Your first hour
 
-1. **Make it yours** *(on your fork — nothing to submit)*: open
-   [`branding.toml`](branding.toml) and put your firm's name on the app. Swap
-   `primaryColor` in `.streamlit/config.toml` for your brand color. Commit the
+1. **Make it yours** *(on your fork — nothing to submit)*: the app ships
+   wearing the AI Lab's purple. Open [`branding.toml`](branding.toml) and put
+   your firm's name and logo on it, then swap `primaryColor` in
+   `.streamlit/config.toml` for your brand color. Commit the
    change and you've made your first commit. Show it off in the
    [show-and-tell issue](../../issues).
 2. **Make it better** *(your first pull request)*: pick an issue labeled

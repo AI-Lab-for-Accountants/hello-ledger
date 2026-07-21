@@ -68,7 +68,8 @@ don't introduce new frameworks, dependencies, or design directions.
 
 ## Style notes for UI work
 
-Warm paper background, one ledger-green accent used sparingly, money in
-right-aligned tabular columns with two decimals, debit and credit always in
-separate columns. Empty states should tell the user what to do next. Never
+Warm paper background with one accent color used sparingly (the AI Lab purple
+by default; member forks may rebrand it — code must never hard-code the accent),
+money in right-aligned tabular columns with two decimals, debit and credit
+always in separate columns. Empty states should tell the user what to do next. Never
 show a raw traceback for a predictable mistake.

@@ -1,10 +1,11 @@
-# Streamlit theme — part of the branding exercise: swap primaryColor for your
-# firm's accent color and the whole app follows.
+# Streamlit theme — part of the branding exercise. These are the AI Lab for
+# Accountants colors; swap primaryColor (and friends) for your firm's brand
+# and the whole app follows.
 [theme]
-primaryColor = "#1F6E54"
-backgroundColor = "#FAF9F5"
-secondaryBackgroundColor = "#FFFFFF"
-textColor = "#26231C"
+primaryColor = "#7c3aed"
+backgroundColor = "#f7f6f1"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#14141b"
 
 [browser]
 gatherUsageStats = false
