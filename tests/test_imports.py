@@ -52,6 +52,15 @@ def test_excel_bom_and_messy_headers_tolerated(conn):
     assert imports.import_accounts(conn, upload(messy)) == 2
 
 
+def test_non_utf8_file_gets_a_friendly_error(conn):
+    """Excel's default 'CSV (Comma delimited)' saves as CP1252, not UTF-8. A
+    name like 'Café' must surface a plain-language message, never a raw
+    UnicodeDecodeError traceback."""
+    cp1252 = "account_number,name,type\n1000,Café,Asset\n".encode("cp1252")
+    with pytest.raises(ledger.LedgerError, match="UTF-8"):
+        imports.import_accounts(conn, io.BytesIO(cp1252))
+
+
 def test_same_upload_parses_twice(conn):
     """The review step parses the file for preview, then again on confirm."""
     file = upload(COA_CSV)
