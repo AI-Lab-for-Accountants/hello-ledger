@@ -31,11 +31,19 @@ def _rows(source, required_columns):
     Uploaded files are read via getvalue() so the same file can be parsed
     twice — once for the review preview, once for the actual import.
     """
-    if isinstance(source, (str, Path)):
-        f = open(source, newline="", encoding="utf-8-sig")
-    else:
-        f = io.StringIO(source.getvalue().decode("utf-8-sig"), newline="")
-    reader = csv.DictReader(f)
+    raw = Path(source).read_bytes() if isinstance(source, (str, Path)) else source.getvalue()
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        # Excel's plain "CSV (Comma delimited)" saves as CP1252, not UTF-8, so a
+        # name like "Café" makes the decode explode. Explain the fix in plain
+        # language instead of letting a raw UnicodeDecodeError reach the screen.
+        raise ledger.LedgerError(
+            "This file isn't saved as UTF-8 text — that usually means it was "
+            "exported as plain 'CSV' from Excel. Re-save it with "
+            "File → Save As → 'CSV UTF-8', then upload it again."
+        )
+    reader = csv.DictReader(io.StringIO(text, newline=""))
     headers = [h.lower().strip() for h in (reader.fieldnames or [])]
     missing = [c for c in required_columns if c not in headers]
     if missing:
