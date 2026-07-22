@@ -5,24 +5,41 @@ Words in **bold** are the GitHub vocabulary worth keeping.
 
 ## The big picture
 
-You never change this repo directly. You change **your copy** (your *fork*),
-and then *ask* this repo to pull your change in — a **pull request** ("PR").
-A maintainer reviews it, the automated tests check it, and if all's well it's
-**merged**. That's how strangers safely build software together, and it's
-exactly what we practice here.
+Nobody changes `main` — the live set of books — directly. You do your work on
+a copy, then *ask* for it to be pulled in — a **pull request** ("PR"). A
+maintainer reviews it, the automated tests check it, and if all's well it's
+**merged**. That's how people safely build software together, and it's exactly
+what we practice here.
+
+There are two kinds of copy, depending on who you are:
+
+- **AI Lab members** are invited as **collaborators** on this repo. Your copy
+  is simply a **branch** right here — `michael-branch`, `sarah-adds-export` —
+  no fork needed. This is how teams inside a firm work.
+- **Everyone else** works on a **fork** — a full personal copy of this repo
+  under your own GitHub account. This is how the wider open-source world
+  works.
+
+Either way, every step below is the same, and either way `main` is protected:
+the only road in is a pull request with green tests and an approving review.
 
 ## Step by step
 
-### 0. Fork (once)
+### 0. Get your copy (once)
 
-Click **Fork** at the top of the repo page. GitHub creates
+**Have a member invite?** Accept it (check your email, or
+[github.com/notifications](https://github.com/notifications)) and you're
+done — you'll work right here in this repo. Skip to step 1.
+
+**No invite?** Click **Fork** at the top of the repo page. GitHub creates
 `github.com/YOUR-USERNAME/hello-ledger` — yours to experiment on. You can't
 break the original from your fork, so relax.
 
-### 1. Open your fork
+### 1. Open your workspace
 
-Easiest: **Code → Codespaces → Create codespace** *on your fork* — a ready
-workspace in your browser. (Or clone it locally per the README.)
+Easiest: **Code → Codespaces → Create codespace** — on this repo if you're a
+member, *on your fork* if you forked. A ready workspace in your browser.
+(Or clone locally per the README.)
 
 ### 2. Pick an issue
 
@@ -80,9 +97,10 @@ Changes**) — click it. Done: your branch is on GitHub.
 
 > *Prefer the terminal?* `git push -u origin add-income-statement`
 
-Now GitHub will show a **"Compare & pull request"** button on your fork — click it,
-check that the target is `AI-Lab-for-Accountants/hello-ledger` `main`, write a
-sentence or two about what you did, and submit.
+Now GitHub will show a **"Compare & pull request"** button — on your fork if
+you forked, right here if you're a member. Click it, check that the target is
+`AI-Lab-for-Accountants/hello-ledger` `main`, write a sentence or two about
+what you did, and submit.
 
 ### 7. Watch the checks, then the review
 
@@ -99,7 +117,9 @@ branch and the PR updates itself), and then **merge**. 🎉
   even better.
 - **Don't refactor the world.** Leave code you didn't need to touch alone.
 - **The branding exercise stays on your fork** — don't PR your firm's name
-  onto everyone's app. 🙂 Post a screenshot in the show-and-tell issue instead.
+  onto everyone's app. 🙂 (Members: this is the one exercise worth forking
+  for — the shared repo keeps the AI Lab purple.) Post a screenshot in the
+  show-and-tell issue instead.
 - **No real client data, ever** — in code, in CSVs, in screenshots, anywhere.
 - Be kind in comments and reviews. Everyone here is learning in public, which
   takes guts.
