@@ -34,8 +34,9 @@ by letting you practice them on a working set of books.
 
 1. Click **Fork** (top right) — this creates *your own copy* of the repo.
 2. On **your fork**, click **Code → Codespaces → Create codespace on main**.
-3. Wait a minute. The app opens on its own; if it doesn't, run
-   `streamlit run app.py` in the terminal.
+3. Wait a minute. The app opens on its own; if it doesn't, click the
+   **Ports** tab (bottom panel) and then the globe 🌐 next to
+   **hello-ledger app**. No terminal needed.
 
 **On your own computer** (needs [Python](https://www.python.org/downloads/) 3.11+):
 
@@ -65,9 +66,11 @@ Or click **⚡ Load all the demo data for me** and skip to exploring.
 1. **Make it yours** *(on your fork — nothing to submit)*: the app ships
    wearing the AI Lab's purple. Open [`branding.toml`](branding.toml) and put
    your firm's name and logo on it, then swap `primaryColor` in
-   `.streamlit/config.toml` for your brand color. Commit the
-   change and you've made your first commit. Show it off in the
-   [show-and-tell issue](../../issues).
+   `.streamlit/config.toml` for your brand color. You can make both edits
+   right on github.com — open the file and click the pencil ✏️ — or in your
+   codespace. Either way, commit from the web form or the **Source Control**
+   panel (no terminal involved) and you've made your first commit. Show it
+   off in the [show-and-tell issue](../../issues).
 2. **Make it better** *(your first pull request)*: pick an issue labeled
    [`good first issue`](../../labels/good%20first%20issue), then follow
    [CONTRIBUTING.md](CONTRIBUTING.md) — it walks you through branch → change →

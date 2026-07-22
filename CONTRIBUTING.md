@@ -30,39 +30,57 @@ Browse the [issues](../../issues) labeled **good first issue**. Each says which
 file(s) to touch and what "done" looks like. Comment "I'll take this one!" so
 two people don't duplicate work.
 
+> **No terminal required.** Every step below is a button in your codespace or
+> on github.com. If you *like* the terminal, the equivalent command is shown
+> in a "prefer the terminal?" note — same result either way.
+
 ### 3. Make a branch
 
 A **branch** is a parallel copy of the code inside your fork where your change
-lives until it's ready. Name it after the work:
+lives until it's ready — a working-paper copy of the file.
 
-```bash
-git switch -c add-income-statement
-```
+In your codespace, click the branch name in the **bottom-left corner** of the
+window (it says `main`), choose **＋ Create new branch…**, and name it after
+the work, e.g. `add-income-statement`.
+
+> *Prefer the terminal?* `git switch -c add-income-statement`
 
 ### 4. Make the change
 
-Edit the files. Run the app (`streamlit run app.py`) and see your change
-working. Run the tests (`pytest`) — they should all pass. Working with an AI
-assistant? Great — have it *explain* its suggestions until you could make the
-change yourself. You're the reviewer of your own work; that instinct is the
-whole profession, and it applies to code too.
+Edit the files. The app is already running in its preview tab (it started when
+your codespace opened) — after you save a file, click **Rerun** in the app, or
+choose **Always rerun** once and forget about it. To run the tests, click the
+**Testing** icon in the left sidebar (the beaker 🧪) and press the play
+button — all green means the books still tie out.
+
+> *Prefer the terminal?* `streamlit run app.py` and `pytest`
+
+Working with an AI assistant? Great — have it *explain* its suggestions until
+you could make the change yourself. You're the reviewer of your own work; that
+instinct is the whole profession, and it applies to code too.
 
 ### 5. Commit
 
-A **commit** is a saved snapshot with a note about what changed and why:
+A **commit** is a saved snapshot with a note about what changed and why —
+a posted entry with a memo.
 
-```bash
-git add -A
-git commit -m "Add an income statement page"
-```
+Click the **Source Control** icon in the left sidebar (the little branch
+diagram — it grows a blue badge counting your changed files). Type your memo
+in the message box — *"Add an income statement page"* — and press
+**✓ Commit**. If it asks whether to stage all changes, say **Yes**.
+
+> *Prefer the terminal?* `git add -A` then
+> `git commit -m "Add an income statement page"`
 
 ### 6. Push and open the pull request
 
-```bash
-git push -u origin add-income-statement
-```
+**Push** means sending your branch up to your fork on GitHub. After you
+commit, that same blue button becomes **Publish Branch** (or **Sync
+Changes**) — click it. Done: your branch is on GitHub.
 
-GitHub will show a **"Compare & pull request"** button on your fork — click it,
+> *Prefer the terminal?* `git push -u origin add-income-statement`
+
+Now GitHub will show a **"Compare & pull request"** button on your fork — click it,
 check that the target is `AI-Lab-for-Accountants/hello-ledger` `main`, write a
 sentence or two about what you did, and submit.
 
