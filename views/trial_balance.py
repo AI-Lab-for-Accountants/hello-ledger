@@ -1,5 +1,8 @@
 """Trial Balance — every account's balance; total debits must equal total credits."""
 
+import csv
+import io
+
 import streamlit as st
 
 import ledger
@@ -32,6 +35,28 @@ st.dataframe(
         "Debit": st.column_config.NumberColumn("Debit", format="dollar"),
         "Credit": st.column_config.NumberColumn("Credit", format="dollar"),
     },
+)
+
+buffer = io.StringIO()
+writer = csv.writer(buffer)
+writer.writerow(["number", "account", "type", "debit", "credit"])
+for r in rows:
+    writer.writerow(
+        [
+            r["number"],
+            r["name"],
+            r["type"],
+            f"{r['debit_cents'] / 100:.2f}" if r["debit_cents"] else "",
+            f"{r['credit_cents'] / 100:.2f}" if r["credit_cents"] else "",
+        ]
+    )
+writer.writerow(["", "Totals", "", f"{total_debits / 100:.2f}", f"{total_credits / 100:.2f}"])
+
+st.download_button(
+    "Download as CSV",
+    buffer.getvalue(),
+    file_name="trial_balance.csv",
+    mime="text/csv",
 )
 
 st.divider()
