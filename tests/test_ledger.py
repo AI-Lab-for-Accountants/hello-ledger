@@ -38,6 +38,20 @@ def test_format_money():
     assert ledger.format_money(0) == "0.00"
 
 
+def test_format_money_edge_cases():
+    assert ledger.format_money(1) == "0.01"  # exactly one cent
+    assert ledger.format_money(-199) == "-1.99"  # negative amount
+    assert ledger.format_money(100000001) == "1,000,000.01"  # over a million
+
+
+def test_to_cents_edge_cases():
+    assert ledger.to_cents(0.01) == 1  # exactly one cent
+    assert ledger.to_cents(-1.99) == -199  # negative amount
+    assert ledger.to_cents("1,234.56") == 123456  # comma thousands separator
+    assert ledger.to_cents("1,000,000.01") == 100000001  # over a million with commas
+    assert ledger.to_cents("") == 0
+
+
 # -------------------------------------------------------------- accounts
 
 
