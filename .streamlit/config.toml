@@ -2,7 +2,7 @@
 # Accountants colors; swap primaryColor (and friends) for your firm's brand
 # and the whole app follows.
 [theme]
-primaryColor = "#7c3aed"
+primaryColor = "#16a34a"
 backgroundColor = "#f7f6f1"
 secondaryBackgroundColor = "#ffffff"
 textColor = "#14141b"
